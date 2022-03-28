@@ -14,6 +14,7 @@ const UserSchema = new mongoose.Schema(
     password: { type: String, required: true },
     isAdmin: { type: Boolean, default: false },
     img: { type: String },
+    favourites: { type: Array },
   },
   { timestamps: true }
 );
