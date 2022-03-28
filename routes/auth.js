@@ -28,7 +28,7 @@ router.post("/login", async (req, res) => {
   try {
     const user = await User.findOne({ username: req.body.username });
 
-    !user && res.status(401).json("Wrong Credentials");
+    !user && res.status(401).json("Invalid Username");
     const hashedPassword = Cryptojs.AES.decrypt(
       user.password,
       process.env.PASS_SEC
@@ -50,7 +50,7 @@ router.post("/login", async (req, res) => {
     const { pass, ...rest } = user._doc;
     res.status(200).json({ ...rest, accessToken });
   } catch (error) {
-    res.status(500).json(error);
+    res.status(500).json(error.message);
   }
 });
 
